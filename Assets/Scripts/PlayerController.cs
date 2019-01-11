@@ -107,24 +107,26 @@ public class PlayerController : MonoBehaviour
             UpdateRespawnTime();
             return;
         }
+        if (!PauseMenu.GameIsPaused)    //THIS HAS BEEN ADDED so that it stops if the game is paused
+        {
+            // Update movement input
+            UpdateMovementState();
 
-        // Update movement input
-        UpdateMovementState();
+            // Update jumping input and apply gravity
+            UpdateJumpState();
+            ApplyGravity();
 
-        // Update jumping input and apply gravity
-        UpdateJumpState();
-        ApplyGravity();
+            // Calculate actual motion
+            m_CurrentMovementOffset = (m_MovementDirection * m_MovementSpeed + m_Force + new Vector3(0, m_VerticalSpeed, 0)) * Time.deltaTime;
 
-        // Calculate actual motion
-        m_CurrentMovementOffset = (m_MovementDirection * m_MovementSpeed + m_Force  + new Vector3(0, m_VerticalSpeed, 0)) * Time.deltaTime;
+            m_Force *= 0.95f;
 
-        m_Force *= 0.95f;
+            // Move character
+            m_CharacterController.Move(m_CurrentMovementOffset);
 
-        // Move character
-        m_CharacterController.Move(m_CurrentMovementOffset);
-
-        // Rotate the character towards the mouse cursor
-        RotateCharacterTowardsMouseCursor();
+            // Rotate the character towards the mouse cursor
+            RotateCharacterTowardsMouseCursor();
+        }
     }
 
     float AngleBetweenTwoPoints(Vector3 a, Vector3 b)

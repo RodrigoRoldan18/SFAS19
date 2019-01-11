@@ -75,7 +75,7 @@ public class GunLogic : MonoBehaviour
             }
         }
 
-        if (m_CanShoot)
+        if (m_CanShoot && !PauseMenu.GameIsPaused) //This has been edited to fix the pause menu
         {
             if(Input.GetButtonDown("Fire1") && m_BulletAmmo > 0)
             {
