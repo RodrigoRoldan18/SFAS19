@@ -18,6 +18,10 @@ public class AIController : MonoBehaviour
     [SerializeField]
     float m_MaxFallSpeed = 20.0f;
 
+    //THIS WAS ADDED: THE DAMAGE OF THE ENEMY
+    [SerializeField]
+    int m_Damage = 10;
+
     // --------------------------------------------------------------
 
     // The charactercontroller of the player
@@ -33,7 +37,7 @@ public class AIController : MonoBehaviour
     Vector3 m_CurrentMovementOffset = Vector3.zero;
 
     // Whether the player is alive or not
-    bool m_IsAlive = true;
+    bool m_IsAlive = true;      
 
     PlayerController m_PlayerController;
     Transform m_PlayerTransform;
@@ -73,7 +77,7 @@ public class AIController : MonoBehaviour
     {
         // If the player is dead update the respawn timer and exit update loop
         if (!m_IsAlive)
-        {
+        {            
             return;
         }
 
@@ -90,10 +94,15 @@ public class AIController : MonoBehaviour
         if(distance < 2.0f)
         {
             // Knock back player
-            m_PlayerController.AddForce((m_MovementDirection + new Vector3(0,2,0)) * 20.0f);
+            Health health = m_PlayerController.GetComponent<Health>();  //THIS WAS ADDED TO DO DAMAGE TO THE PLAYER
+            if(health)
+            {
+                health.DoDamage(m_Damage);
+            }
+            m_PlayerController.AddForce((m_MovementDirection + new Vector3(0,2,0)) * 20.0f);            
         }
 
-        Debug.Log(distance);
+        //Debug.Log(distance);
 
         // Update jumping input and apply gravity
         ApplyGravity();

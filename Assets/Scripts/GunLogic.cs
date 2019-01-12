@@ -19,8 +19,8 @@ public class GunLogic : MonoBehaviour
     // The Bullet Spawn Point
     [SerializeField]
     float m_ShotCooldown = 0.5f;
-
-    bool m_CanShoot = true;
+   
+    bool m_CanShoot = true;    
 
     // VFX
     [SerializeField]
@@ -142,7 +142,7 @@ public class GunLogic : MonoBehaviour
                 m_UIManager.SetAmmoText(m_BulletAmmo, m_GrenadeAmmo);
             }
         }
-    }
+    }   
 
     void PlayGunVFX()
     {
