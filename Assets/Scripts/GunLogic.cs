@@ -19,9 +19,17 @@ public class GunLogic : MonoBehaviour
     // The Bullet Spawn Point
     [SerializeField]
     float m_ShotCooldown = 0.5f;
-   
-    bool m_CanShoot = true;    
 
+    [SerializeField]
+    float m_InvisibilityCooldown = 3f;
+
+    public MeshRenderer PlayerRender;
+
+    [SerializeField]
+    ParticleSystem m_Invisibility;
+   
+    bool m_CanShoot = true;
+    bool m_CanInvisibility = true;
     // VFX
     [SerializeField]
     ParticleSystem m_Flare;
@@ -74,6 +82,14 @@ public class GunLogic : MonoBehaviour
                 m_CanShoot = true;
             }
         }
+        if(!m_CanInvisibility)
+        {
+            m_InvisibilityCooldown -= Time.deltaTime;
+            if(m_InvisibilityCooldown < 0.0f)
+            {
+                m_CanInvisibility = true;
+            }
+        }
 
         if (m_CanShoot && (!PauseMenu.GameIsPaused || !GameOver.GameIsEnded)) //This has been edited to fix the pause menu
         {
@@ -86,6 +102,16 @@ public class GunLogic : MonoBehaviour
             {
                 FireGrenade();
                 m_CanShoot = false;
+            }
+        }
+
+        if(m_CanInvisibility && (!PauseMenu.GameIsPaused || !GameOver.GameIsEnded))
+        {
+            if(Input.GetButtonDown("Invisibility"))
+            {
+                m_Invisibility.Play();  //IDK why it doesn't do it :(
+                FindObjectOfType<PlayerController>().MakeInvisible();                                          
+                m_CanInvisibility = false;
             }
         }
     }
@@ -142,7 +168,7 @@ public class GunLogic : MonoBehaviour
                 m_UIManager.SetAmmoText(m_BulletAmmo, m_GrenadeAmmo);
             }
         }
-    }   
+    } 
 
     void PlayGunVFX()
     {

@@ -197,5 +197,33 @@ public class PlayerController : MonoBehaviour
     public void AddForce(Vector3 force)
     {
         m_Force += force;
-    }      
+    }   
+    
+    public void MakeInvisible()
+    {
+        Renderer[] rs = GetComponentsInChildren<Renderer>();
+        foreach(Renderer r in rs)
+        {
+            if(r.name == "Player" ||
+                r.name == "RightEye" ||
+                r.name == "LeftEye")
+            {
+                r.enabled = false;
+            }
+        }
+        Invoke("InvisibleCooldown", 3);
+    }
+    void InvisibleCooldown()
+    {
+        Renderer[] rs = GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in rs)
+        {
+            if (r.name == "Player" ||
+                r.name == "RightEye" ||
+                r.name == "LeftEye")
+            {
+                r.enabled = true;
+            }
+        }
+    }   
 }

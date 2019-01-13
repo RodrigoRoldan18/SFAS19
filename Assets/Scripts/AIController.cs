@@ -41,6 +41,9 @@ public class AIController : MonoBehaviour
 
     PlayerController m_PlayerController;
     Transform m_PlayerTransform;
+    GameObject player;
+    public MeshRenderer PlayerRender;   //THIS WAS ADDED AND WILL HAVE TO BE EDITED WHEN ANOTHER PLAYER IS ADDED
+
 
     // --------------------------------------------------------------
 
@@ -53,7 +56,7 @@ public class AIController : MonoBehaviour
     void Start()
     {
         // Get Player information
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         if(player)
         {
             m_PlayerController = player.GetComponent<PlayerController>();
@@ -111,12 +114,13 @@ public class AIController : MonoBehaviour
         m_CurrentMovementOffset = (m_MovementDirection * m_MovementSpeed + new Vector3(0, m_VerticalSpeed, 0)) * Time.deltaTime;
 
         // Move character
-        if (m_PlayerTransform.position.y > -6f)
-        {
-            m_CharacterController.Move(m_CurrentMovementOffset);
-        }else
+        if (m_PlayerTransform.position.y < -6f || PlayerRender.enabled == false)//THIS WAS ADDED: Make this also be affected when the player is invisible
         {
             m_MovementDirection = Vector3.zero;
+        }
+        else
+        {
+            m_CharacterController.Move(m_CurrentMovementOffset);            
         }    
 
         // Rotate the character in movement direction
