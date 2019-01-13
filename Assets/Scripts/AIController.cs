@@ -102,7 +102,7 @@ public class AIController : MonoBehaviour
             m_PlayerController.AddForce((m_MovementDirection + new Vector3(0,2,0)) * 20.0f);            
         }
 
-        //Debug.Log(distance);
+        //Debug.Log(distance);        
 
         // Update jumping input and apply gravity
         ApplyGravity();
@@ -111,7 +111,13 @@ public class AIController : MonoBehaviour
         m_CurrentMovementOffset = (m_MovementDirection * m_MovementSpeed + new Vector3(0, m_VerticalSpeed, 0)) * Time.deltaTime;
 
         // Move character
-        m_CharacterController.Move(m_CurrentMovementOffset);
+        if (m_PlayerTransform.position.y > -6f)
+        {
+            m_CharacterController.Move(m_CurrentMovementOffset);
+        }else
+        {
+            m_MovementDirection = Vector3.zero;
+        }    
 
         // Rotate the character in movement direction
         if(m_MovementDirection != Vector3.zero)

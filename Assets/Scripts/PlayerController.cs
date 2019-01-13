@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -50,6 +51,10 @@ public class PlayerController : MonoBehaviour
 
     // The force added to the player (used for knockbacks)
     Vector3 m_Force = Vector3.zero;
+
+    //THIS WAS ADDED: The heart image
+    public Image Life1, Life2, Life3;    
+    public int Lifes = 3;
 
     // --------------------------------------------------------------
 
@@ -107,7 +112,7 @@ public class PlayerController : MonoBehaviour
             UpdateRespawnTime();
             return;
         }
-        if (!PauseMenu.GameIsPaused)    //THIS HAS BEEN ADDED so that it stops if the game is paused
+        if (!PauseMenu.GameIsPaused || !GameOver.GameIsEnded)    //THIS HAS BEEN ADDED so that it stops if the game is paused
         {
             // Update movement input
             UpdateMovementState();
@@ -157,6 +162,20 @@ public class PlayerController : MonoBehaviour
     {
         m_IsAlive = false;
         m_RespawnTime = MAX_RESPAWN_TIME;
+        if (Lifes == 3)
+        {
+            Destroy(Life3);
+            Lifes -= 1;
+        } else if (Lifes == 2)
+        {
+            Destroy(Life2);
+            Lifes -= 1;
+        } else if (Lifes == 1)
+        {
+            Destroy(Life1);
+            Lifes -= 1;
+            FindObjectOfType<GameOver>().DisplayGameOver();                  
+        }
     }
 
     void UpdateRespawnTime()
@@ -178,5 +197,5 @@ public class PlayerController : MonoBehaviour
     public void AddForce(Vector3 force)
     {
         m_Force += force;
-    }
+    }      
 }

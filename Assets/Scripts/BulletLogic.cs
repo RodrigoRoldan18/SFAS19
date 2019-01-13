@@ -14,15 +14,19 @@ public class BulletLogic : MonoBehaviour
 
     // The damage of the bullet
     [SerializeField]
-    int m_Damage = 20;
+    int m_BulletDamage = 20;
 
+    // THIS WAS ADDED: The damage of the missile
+    [SerializeField]
+    int m_MissileDamage = 50;    
+    
     bool m_Active = true;
 
     // Use this for initialization
     void Start()
     {
         // Add velocity to the bullet
-        GetComponent<Rigidbody>().velocity = -transform.up * m_BulletSpeed;
+        GetComponent<Rigidbody>().velocity = -transform.up * m_BulletSpeed;            
     }
 
     // Update is called once per frame
@@ -43,9 +47,13 @@ public class BulletLogic : MonoBehaviour
         }
 
         Health health = collision.gameObject.GetComponent<Health>();
-        if(health)
+        if(health && gameObject.name == "Bullet(Clone)")
         {
-            health.DoDamage(m_Damage);
+            health.DoDamage(m_BulletDamage);
+        }
+        else if(health && gameObject.name == "ExplosiveBullet(Clone)")
+        {
+            health.DoDamage(m_MissileDamage);
         }
 
         Impact();

@@ -19,10 +19,16 @@ public class Health : MonoBehaviour
     public void DoDamage(int damage)
     {
         m_Health -= damage;        
-        healthBar.fillAmount = m_Health / health;
-        if (m_Health <= 0)
-        {
+        healthBar.fillAmount = m_Health / health;       
+        if (m_Health <= 0 && gameObject.name != "Player")
+        {            
             Destroy(gameObject);
+        }else if (m_Health <= 0 && gameObject.name == "Player")
+        {
+            healthBar.fillAmount = 1f;
+            m_Health = health;
+            //THIS KEEPS LOOPING AND THE PLAYER DIES INTANTLY SOMEHOW
+            //GetComponent<PlayerController>().Die();
         }
     }
 
