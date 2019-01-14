@@ -5,37 +5,17 @@ using UnityEngine;
 public class CoinPickup : MonoBehaviour {
 
     public Transform coinEffect;
-    public int coinValue = 1;
-
-    [SerializeField]
-    int m_Score = 0;
-
-    UIManager m_UIManager;
-
-    void Start()
-    {
-        m_UIManager = FindObjectOfType<UIManager>();
-        // Update UI
-        if (m_UIManager)
-        {
-            m_UIManager.SetScoreText(m_Score);
-        }
-    }
+    public int coinValue = 1;    
 
     void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
-            m_Score += coinValue;
+            FindObjectOfType<GameControl>().AddCoin();          
             var effect = Instantiate(coinEffect, transform.position, transform.rotation);
             Destroy(effect.gameObject, 3);
             Destroy(gameObject);
-
-            // Update UI
-            if (m_UIManager)
-            {
-                m_UIManager.SetScoreText(m_Score);
-            }
+            FindObjectOfType<GameControl>().UpdateScoreUI();
         }
     }
 }
