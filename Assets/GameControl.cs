@@ -14,6 +14,10 @@ public class GameControl : MonoBehaviour {
 
     void Start()
     {
+        if(!FindObjectOfType<PlayerController>())
+        {
+            ResetValues();
+        }
         int m_Score = PlayerPrefs.GetInt("Score", 0);
         Score = m_Score;
         m_UIManager = FindObjectOfType<UIManager>();
@@ -26,7 +30,8 @@ public class GameControl : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if(!FindObjectOfType<CoinPickup>())
+        if (!FindObjectOfType<CoinPickup>() &&
+            FindObjectOfType<PlayerController>())
         {
             WinLevel();
         }		
@@ -50,6 +55,15 @@ public class GameControl : MonoBehaviour {
     
     public void AddCoin()
     {
+        //Debug.Log(Score);
         PlayerPrefs.SetInt("Score", Score + 1);
-    }  
+        Score += 1;
+    }
+
+    void ResetValues()
+    {
+        PlayerPrefs.SetInt("Score", 0);
+        PlayerPrefs.SetInt("levelReached", 1);
+    }
+
 }
