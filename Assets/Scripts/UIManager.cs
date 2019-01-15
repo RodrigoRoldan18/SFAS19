@@ -17,6 +17,13 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     Text m_ScoreText;
 
+    //THESE NEXT THINGS WERE ADDED
+    [SerializeField]
+    Image m_Logo;
+
+    public float maxTime = 60f;
+    public float timeLeft;    
+
     // --------------------------------------------------------------
 
     public void SetAmmoText(int bulletCount, int grenadeCount)
@@ -37,6 +44,24 @@ public class UIManager : MonoBehaviour
         if(m_ScoreText)
         {
             m_ScoreText.text = "Score: " + currentScore;
+        }
+    }
+
+    void Start()
+    {
+        timeLeft = maxTime;
+    }
+
+    void Update()
+    {
+        if(timeLeft > 0)
+        {
+            timeLeft -= Time.deltaTime;
+            m_Logo.fillAmount = timeLeft / maxTime;
+        } else
+        {
+            //Gameover
+            Time.timeScale = 0;
         }
     }
 }

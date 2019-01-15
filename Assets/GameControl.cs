@@ -49,6 +49,8 @@ public class GameControl : MonoBehaviour {
     public void WinLevel()
     {
         Debug.Log("LEVEL WON");
+        int timeLeftPoints =(int) m_UIManager.timeLeft * 100;
+        PlayerPrefs.SetInt("Score", Score + timeLeftPoints);
         PlayerPrefs.SetInt("levelReached", levelToUnlock);
         SceneManager.LoadScene(nextLevel);
     } 
