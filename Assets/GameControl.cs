@@ -52,7 +52,7 @@ public class GameControl : MonoBehaviour {
         int timeLeftPoints =(int) m_UIManager.timeLeft * 100;
         PlayerPrefs.SetInt("Score", Score + timeLeftPoints);
         PlayerPrefs.SetInt("levelReached", levelToUnlock);
-        SceneManager.LoadScene(nextLevel);
+        SceneManager.LoadScene("LevelSelector");       
     } 
     
     public void AddCoin()

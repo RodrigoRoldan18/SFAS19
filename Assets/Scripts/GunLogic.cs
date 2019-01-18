@@ -23,6 +23,8 @@ public class GunLogic : MonoBehaviour
     [SerializeField]
     float m_InvisibilityCooldown = 3f;
 
+    float m_GhostTimeLeft = 3f;
+    
     public MeshRenderer PlayerRender;
 
     [SerializeField]
@@ -56,7 +58,7 @@ public class GunLogic : MonoBehaviour
     [SerializeField]
     int m_GrenadeAmmo = 5;
 
-    UIManager m_UIManager;
+    UIManager m_UIManager;    
 
     // Use this for initialization
     void Start ()
@@ -84,10 +86,14 @@ public class GunLogic : MonoBehaviour
         }
         if(!m_CanInvisibility)
         {
-            m_InvisibilityCooldown -= Time.deltaTime;
-            if(m_InvisibilityCooldown < 0.0f)
+            m_InvisibilityCooldown -= Time.deltaTime;            
+            m_UIManager.m_Ghost.fillAmount = m_InvisibilityCooldown / m_GhostTimeLeft;
+            if (m_InvisibilityCooldown < 0.0f)
             {
                 m_CanInvisibility = true;
+                m_InvisibilityCooldown = 3f;
+                m_GhostTimeLeft = 3f;
+                m_UIManager.m_Ghost.fillAmount = 1f;                
             }
         }
 
@@ -109,11 +115,11 @@ public class GunLogic : MonoBehaviour
         {
             if(Input.GetButtonDown("Invisibility"))
             {
-                m_Invisibility.Play();  //IDK why it doesn't do it :(
+                m_Invisibility.Play();
                 FindObjectOfType<PlayerController>().MakeInvisible();                                          
-                m_CanInvisibility = false;
+                m_CanInvisibility = false;                              
             }
-        }
+        }        
     }
 
     void Fire()
