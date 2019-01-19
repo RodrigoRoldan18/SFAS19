@@ -7,17 +7,18 @@ public class GameControl : MonoBehaviour {
     [SerializeField]    
     public string nextLevel = "Level1";
     public int levelToUnlock = 2;
-    int Score;
-
+       
+    int HighscoreLevel1, HighscoreLevel2, Score;
 
     UIManager m_UIManager;
 
     void Start()
     {
-        if(!FindObjectOfType<PlayerController>())
+        if(!FindObjectOfType<PlayerController>() && !FindObjectOfType<LevelSelect>())
         {
             ResetValues();
         }
+        GetHighscoreValues();
         int m_Score = PlayerPrefs.GetInt("Score", 0);
         Score = m_Score;
         m_UIManager = FindObjectOfType<UIManager>();
@@ -49,10 +50,24 @@ public class GameControl : MonoBehaviour {
     public void WinLevel()
     {
         Debug.Log("LEVEL WON");
-        int timeLeftPoints =(int) m_UIManager.timeLeft * 100;
-        PlayerPrefs.SetInt("Score", Score + timeLeftPoints);
+        int timeLeftPoints =(int) m_UIManager.timeLeft * 100;            
+        if(SceneManager.GetActiveScene().name == "MainScene")
+        {
+            if(Score + timeLeftPoints > HighscoreLevel1)
+             {
+                PlayerPrefs.SetInt("HighscoreLevel1", Score + timeLeftPoints);
+             }
+        } else if (SceneManager.GetActiveScene().name == "Level1")
+        {
+            if(Score + timeLeftPoints > HighscoreLevel2)
+            {
+                PlayerPrefs.SetInt("HighscoreLevel2", Score + timeLeftPoints);
+            }
+        }
+        
         PlayerPrefs.SetInt("levelReached", levelToUnlock);
-        SceneManager.LoadScene("LevelSelector");       
+        SceneManager.LoadScene("LevelSelector");        
+        PlayerPrefs.SetInt("Score", 0);
     } 
     
     public void AddCoin()
@@ -66,6 +81,14 @@ public class GameControl : MonoBehaviour {
     {
         PlayerPrefs.SetInt("Score", 0);
         PlayerPrefs.SetInt("levelReached", 1);
+        PlayerPrefs.SetInt("HighscoreLevel1", 0);
+        PlayerPrefs.SetInt("HighscoreLevel2", 0);
+    }
+
+    void GetHighscoreValues()
+    {
+        HighscoreLevel1 = PlayerPrefs.GetInt("HighscoreLevel1", 0);
+        HighscoreLevel2 = PlayerPrefs.GetInt("HighscoreLevel2", 0);        
     }
 
 }

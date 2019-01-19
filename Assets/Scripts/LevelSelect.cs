@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class LevelSelect : MonoBehaviour {
 
     public Button[] levelButtons;
+    public Text[] Highscores;
 
     void Start()
     {
@@ -13,8 +14,17 @@ public class LevelSelect : MonoBehaviour {
 
         for (int i = 0; i < levelButtons.Length; i++)
         {
-            if(i +1 > levelReached)
+            if (i + 1 > levelReached)
+            {
                 levelButtons[i].interactable = false;
+            }
+            if (i == 0)
+            {
+                Highscores[i].text = "Highscore: " + PlayerPrefs.GetInt("HighscoreLevel1", 0);
+            } else if (i == 1)
+            {
+                Highscores[i].text = "Highscore: " + PlayerPrefs.GetInt("HighscoreLevel2", 0);
+            }           
         }
     }
 
