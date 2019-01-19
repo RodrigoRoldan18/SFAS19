@@ -65,9 +65,9 @@ public class GameControl : MonoBehaviour {
             }
         }
         
-        PlayerPrefs.SetInt("levelReached", levelToUnlock);
-        SceneManager.LoadScene("LevelSelector");        
-        PlayerPrefs.SetInt("Score", 0);
+        PlayerPrefs.SetInt("levelReached", levelToUnlock);                       
+        PlayerPrefs.SetInt("Score", Score + timeLeftPoints);
+        FindObjectOfType<LevelWon>().DisplayLevelWon();
     } 
     
     public void AddCoin()
