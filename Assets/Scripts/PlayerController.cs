@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
             UpdateRespawnTime();
             return;
         }
-        if (!PauseMenu.GameIsPaused || !GameOver.GameIsEnded)    //THIS HAS BEEN ADDED so that it stops if the game is paused
+        if (!PauseMenu.GameIsPaused || !GameOver.GameIsEnded || !LevelWon.LevelIsWon)    //THIS HAS BEEN ADDED so that it stops if the game is paused
         {
             // Update movement input
             UpdateMovementState();

@@ -8,12 +8,12 @@ public class LevelWon : MonoBehaviour {
 
     public static bool LevelIsWon = false;
     public GameObject MenuUI;
+    
+    [SerializeField]
+    private Text Score;
 
     [SerializeField]
-    Text Score;
-
-    [SerializeField]
-    Text Highscore;
+    private Text Highscore;
 
     public void DisplayLevelWon()
     {
@@ -28,15 +28,14 @@ public class LevelWon : MonoBehaviour {
         else if (SceneManager.GetActiveScene().name == "Level1")
         {
             Highscore.text = "HIGHSCORE: " + PlayerPrefs.GetInt("HighscoreLevel2");
-        }
-
-        Debug.Log("SCORE: " + PlayerPrefs.GetInt("Score"));
+        }              
     }
 
     public void LoadLevelSelector()
     {
         Time.timeScale = 1f;
         LevelIsWon = false;
+        PlayerPrefs.SetInt("Score", 0);
         SceneManager.LoadScene("LevelSelector");
     }
 
@@ -44,5 +43,5 @@ public class LevelWon : MonoBehaviour {
     {
         Debug.Log("Quitting game...");
         Application.Quit();
-    }     	
+    }    	
 }

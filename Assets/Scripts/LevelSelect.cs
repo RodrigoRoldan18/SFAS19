@@ -4,8 +4,11 @@ using UnityEngine.UI;
 
 public class LevelSelect : MonoBehaviour {
 
-    public Button[] levelButtons;
-    public Text[] Highscores;
+    [SerializeField]
+    private Button[] levelButtons;
+
+    [SerializeField]
+    private Text[] Highscores;
 
     void Start()
     {
@@ -30,6 +33,6 @@ public class LevelSelect : MonoBehaviour {
 
 	public void Select (string levelName)
     {
-        SceneManager.LoadScene(levelName);
+        SceneManager.LoadScene(levelName);        
     }
 }

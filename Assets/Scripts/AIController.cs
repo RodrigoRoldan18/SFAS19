@@ -42,7 +42,9 @@ public class AIController : MonoBehaviour
     PlayerController m_PlayerController;
     Transform m_PlayerTransform;
     GameObject player;
-    public MeshRenderer PlayerRender;   //THIS WAS ADDED AND WILL HAVE TO BE EDITED WHEN ANOTHER PLAYER IS ADDED
+
+    [SerializeField]
+    private MeshRenderer PlayerRender;   //THIS WAS ADDED AND WILL HAVE TO BE EDITED WHEN ANOTHER PLAYER IS ADDED
 
 
     // --------------------------------------------------------------

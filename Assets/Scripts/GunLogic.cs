@@ -21,9 +21,9 @@ public class GunLogic : MonoBehaviour
     float m_ShotCooldown = 0.5f;
 
     [SerializeField]
-    float m_InvisibilityCooldown = 3f;
+    float m_InvisibilityCooldown = 6f;
 
-    float m_GhostTimeLeft = 3f;
+    float m_GhostTimeLeft = 6f;
     
     public MeshRenderer PlayerRender;
 
@@ -91,13 +91,13 @@ public class GunLogic : MonoBehaviour
             if (m_InvisibilityCooldown < 0.0f)
             {
                 m_CanInvisibility = true;
-                m_InvisibilityCooldown = 3f;
-                m_GhostTimeLeft = 3f;
+                m_InvisibilityCooldown = 6f;
+                m_GhostTimeLeft = 6f;
                 m_UIManager.m_Ghost.fillAmount = 1f;                
             }
         }
 
-        if (m_CanShoot && (!PauseMenu.GameIsPaused || !GameOver.GameIsEnded)) //This has been edited to fix the pause menu
+        if (m_CanShoot && (!PauseMenu.GameIsPaused || !GameOver.GameIsEnded || !LevelWon.LevelIsWon)) //This has been edited to fix the pause menu
         {
             if(Input.GetButtonDown("Fire1") && m_BulletAmmo > 0)
             {
@@ -111,7 +111,7 @@ public class GunLogic : MonoBehaviour
             }
         }
 
-        if(m_CanInvisibility && (!PauseMenu.GameIsPaused || !GameOver.GameIsEnded))
+        if(m_CanInvisibility && (!PauseMenu.GameIsPaused || !GameOver.GameIsEnded || !LevelWon.LevelIsWon))
         {
             if(Input.GetButtonDown("Invisibility"))
             {

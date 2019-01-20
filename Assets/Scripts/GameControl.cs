@@ -4,13 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour {
-    [SerializeField]    
-    public string nextLevel = "Level1";
-    public int levelToUnlock = 2;
-       
-    int HighscoreLevel1, HighscoreLevel2, Score;
+    [SerializeField]
+    private int levelToUnlock = 2;
 
-    UIManager m_UIManager;
+    private bool stopUpdating = false;       
+    private int HighscoreLevel1, HighscoreLevel2, Score;
+    private UIManager m_UIManager;
 
     void Start()
     {
@@ -32,9 +31,11 @@ public class GameControl : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         if (!FindObjectOfType<CoinPickup>() &&
-            FindObjectOfType<PlayerController>())
+            FindObjectOfType<PlayerController>() &&
+            stopUpdating == false)
         {
             WinLevel();
+            stopUpdating = true;
         }		
 	}
 
@@ -67,6 +68,7 @@ public class GameControl : MonoBehaviour {
         
         PlayerPrefs.SetInt("levelReached", levelToUnlock);                       
         PlayerPrefs.SetInt("Score", Score + timeLeftPoints);
+        UpdateScoreUI();
         FindObjectOfType<LevelWon>().DisplayLevelWon();
     } 
     
