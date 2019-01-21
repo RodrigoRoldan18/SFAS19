@@ -23,9 +23,9 @@ public class GunLogic : MonoBehaviour
     [SerializeField]
     float m_InvisibilityCooldown = 6f;
 
-    float m_GhostTimeLeft = 6f;
+    float m_GhostTimeLeft;
     
-    public MeshRenderer PlayerRender;
+    //MeshRenderer PlayerRender;
 
     [SerializeField]
     ParticleSystem m_Invisibility;
@@ -65,6 +65,7 @@ public class GunLogic : MonoBehaviour
     {
         m_AudioSource = GetComponent<AudioSource>();
         m_UIManager = FindObjectOfType<UIManager>();
+        m_GhostTimeLeft = m_InvisibilityCooldown;
 
         // Update UI
         if (m_UIManager)
@@ -86,13 +87,12 @@ public class GunLogic : MonoBehaviour
         }
         if(!m_CanInvisibility)
         {
-            m_InvisibilityCooldown -= Time.deltaTime;            
-            m_UIManager.m_Ghost.fillAmount = m_InvisibilityCooldown / m_GhostTimeLeft;
-            if (m_InvisibilityCooldown < 0.0f)
+            m_GhostTimeLeft -= Time.deltaTime;
+            m_UIManager.m_Ghost.fillAmount = m_GhostTimeLeft / m_InvisibilityCooldown;
+            if (m_GhostTimeLeft < 0.0f)
             {
                 m_CanInvisibility = true;
-                m_InvisibilityCooldown = 6f;
-                m_GhostTimeLeft = 6f;
+                m_GhostTimeLeft = m_InvisibilityCooldown;
                 m_UIManager.m_Ghost.fillAmount = 1f;                
             }
         }

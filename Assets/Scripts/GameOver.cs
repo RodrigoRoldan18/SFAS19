@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour {
 
     public static bool GameIsEnded = false;
-    public GameObject MenuUI;
+
+    [SerializeField]
+    private GameObject MenuUI;
     
     public void DisplayGameOver()
     {

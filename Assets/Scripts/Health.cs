@@ -5,35 +5,40 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public Image healthBar;
-    private float health;
+    [SerializeField]
+    Image healthBar;
+
+    float health;
     // The total health of this unit
     [SerializeField]
-    float m_Health = 100;
+    float m_Health = 100;    
 
     void Start()
-    {
+    {        
         health = m_Health;
     }
 
     public void DoDamage(int damage)
     {
-        m_Health -= damage;        
-        healthBar.fillAmount = m_Health / health;       
-        if (m_Health <= 0 && gameObject.name != "Player")
+        health -= damage;        
+        healthBar.fillAmount = health / m_Health;       
+        if (health <= 0 && gameObject.name != "Player")
         {            
             Destroy(gameObject);
-        }else if (m_Health <= 0 && gameObject.name == "Player")
+            FindObjectOfType<GameControl>().PointsForEnemy();
+            FindObjectOfType<GameControl>().UpdateScoreUI();
+        }
+        else if (health <= 0 && gameObject.name == "Player")
         {
             healthBar.fillAmount = 1f;
-            m_Health = health;
-            //THIS KEEPS LOOPING AND THE PLAYER DIES INTANTLY SOMEHOW
+            health = m_Health;
+            //THIS KEEPS LOOPING AND THE PLAYER DIES INTANTLY SOMEHOW.
             //GetComponent<PlayerController>().Die();
         }
     }
 
     public bool IsAlive()
     {
-        return m_Health > 0;
+        return health > 0;
     }    
 }

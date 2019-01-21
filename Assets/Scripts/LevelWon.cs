@@ -7,7 +7,9 @@ using UnityEngine.UI;
 public class LevelWon : MonoBehaviour {
 
     public static bool LevelIsWon = false;
-    public GameObject MenuUI;
+
+    [SerializeField]
+    private GameObject MenuUI;
     
     [SerializeField]
     private Text Score;

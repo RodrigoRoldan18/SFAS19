@@ -7,6 +7,12 @@ public class GameControl : MonoBehaviour {
     [SerializeField]
     private int levelToUnlock = 2;
 
+    [SerializeField]
+    private int coinValue = 1;
+
+    [SerializeField]
+    private int enemyValue = 5;
+
     private bool stopUpdating = false;       
     private int HighscoreLevel1, HighscoreLevel2, Score;
     private UIManager m_UIManager;
@@ -73,10 +79,15 @@ public class GameControl : MonoBehaviour {
     } 
     
     public void AddCoin()
+    {        
+        Score += coinValue;
+        PlayerPrefs.SetInt("Score", Score);        
+    }
+
+    public void PointsForEnemy()
     {
-        //Debug.Log(Score);
-        PlayerPrefs.SetInt("Score", Score + 1);
-        Score += 1;
+        Score += enemyValue;
+        PlayerPrefs.SetInt("Score", Score);
     }
 
     void ResetValues()

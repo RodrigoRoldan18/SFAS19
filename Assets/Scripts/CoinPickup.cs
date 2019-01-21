@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CoinPickup : MonoBehaviour {
 
-    public Transform coinEffect;
-    public int coinValue = 1;    
+    [SerializeField]
+    Transform coinEffect;       
 
     void OnTriggerEnter(Collider other)
     {

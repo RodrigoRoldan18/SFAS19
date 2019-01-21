@@ -53,8 +53,17 @@ public class PlayerController : MonoBehaviour
     Vector3 m_Force = Vector3.zero;
 
     //THIS WAS ADDED: The heart image
-    public Image Life1, Life2, Life3;    
-    public int Lifes = 3;
+    [SerializeField]
+    Image Life1;
+
+    [SerializeField]
+    Image Life2;
+
+    [SerializeField]
+    Image Life3;
+    
+    [SerializeField]    
+    int Lifes = 3;
 
     // --------------------------------------------------------------
 

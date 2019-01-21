@@ -20,11 +20,12 @@ public class UIManager : MonoBehaviour
     //THESE NEXT THINGS WERE ADDED
     [SerializeField]
     Image m_Logo;
-
-    [SerializeField]
+    
     public Image m_Ghost;
 
-    public float maxTime = 60f;
+    [SerializeField]
+    float maxTime = 60f;
+
     public float timeLeft;    
 
     // --------------------------------------------------------------
@@ -60,11 +61,10 @@ public class UIManager : MonoBehaviour
         if(timeLeft > 0)
         {
             timeLeft -= Time.deltaTime;
-            m_Logo.fillAmount = timeLeft / maxTime;
-            //Debug.Log(timeLeft);
+            m_Logo.fillAmount = timeLeft / maxTime;            
         } else
         {
-            //Gameover
+            FindObjectOfType<GameOver>().DisplayGameOver();
             Time.timeScale = 0;
         }        
     }    
