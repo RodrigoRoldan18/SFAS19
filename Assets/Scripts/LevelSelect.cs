@@ -27,6 +27,9 @@ public class LevelSelect : MonoBehaviour {
             } else if (i == 1)
             {
                 Highscores[i].text = "Highscore: " + PlayerPrefs.GetInt("HighscoreLevel2", 0);
+            } else if(i == 2)
+            {
+                Highscores[i].text = "Highscore: " + PlayerPrefs.GetInt("HighscoreLevel3", 0);
             }           
         }
     }

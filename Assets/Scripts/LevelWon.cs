@@ -30,6 +30,10 @@ public class LevelWon : MonoBehaviour {
         else if (SceneManager.GetActiveScene().name == "Level1")
         {
             Highscore.text = "HIGHSCORE: " + PlayerPrefs.GetInt("HighscoreLevel2");
+        }
+        else if(SceneManager.GetActiveScene().name == "Level2")
+        {
+            Highscore.text = "HIGHSCORE: " + PlayerPrefs.GetInt("HighscoreLevel3");
         }              
     }
 

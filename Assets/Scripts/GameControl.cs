@@ -14,7 +14,7 @@ public class GameControl : MonoBehaviour {
     private int enemyValue = 5;
 
     private bool stopUpdating = false;       
-    private int HighscoreLevel1, HighscoreLevel2, Score;
+    private int HighscoreLevel1, HighscoreLevel2, HighscoreLevel3, Score;
     private UIManager m_UIManager;
 
     void Start()
@@ -70,6 +70,12 @@ public class GameControl : MonoBehaviour {
             {
                 PlayerPrefs.SetInt("HighscoreLevel2", Score + timeLeftPoints);
             }
+        } else if(SceneManager.GetActiveScene().name == "Level2")
+        {
+            if(Score + timeLeftPoints > HighscoreLevel3)
+            {
+                PlayerPrefs.SetInt("HighscoreLevel3", Score + timeLeftPoints);
+            }
         }
         
         PlayerPrefs.SetInt("levelReached", levelToUnlock);                       
@@ -96,12 +102,14 @@ public class GameControl : MonoBehaviour {
         PlayerPrefs.SetInt("levelReached", 1);
         PlayerPrefs.SetInt("HighscoreLevel1", 0);
         PlayerPrefs.SetInt("HighscoreLevel2", 0);
+        PlayerPrefs.SetInt("HighscoreLevel3", 0);
     }
 
     void GetHighscoreValues()
     {
         HighscoreLevel1 = PlayerPrefs.GetInt("HighscoreLevel1", 0);
-        HighscoreLevel2 = PlayerPrefs.GetInt("HighscoreLevel2", 0);        
+        HighscoreLevel2 = PlayerPrefs.GetInt("HighscoreLevel2", 0);
+        HighscoreLevel3 = PlayerPrefs.GetInt("HighscoreLevel3", 0);        
     }
 
 }
