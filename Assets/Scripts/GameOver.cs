@@ -8,20 +8,21 @@ public class GameOver : MonoBehaviour {
     public static bool GameIsEnded = false;
 
     [SerializeField]
-    private GameObject MenuUI;
+    GameObject MenuUI;
     
     public void DisplayGameOver()
     {
         MenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsEnded = true;
+        FindObjectOfType<AudioManager>().Play("PlayerDeath");
     }
 
-    public void LoadMenu()
+    public void LoadLevelSelector()
     {
-        Time.timeScale = 1f;
         GameIsEnded = false;
-        SceneManager.LoadScene("Menu");
+        Time.timeScale = 1f;        
+        SceneManager.LoadScene("LevelSelector");
     }
 
     public void QuitGame()

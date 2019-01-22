@@ -26,7 +26,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     float maxTime = 60f;
 
-    public float timeLeft;    
+    public float timeLeft;
+
+    bool stopUpdating = false;    
 
     // --------------------------------------------------------------
 
@@ -54,18 +56,19 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         timeLeft = maxTime;
+        stopUpdating = false;
     }
 
     void Update()
-    {        
-        if(timeLeft > 0)
+    {
+        if (timeLeft > 0)
         {
             timeLeft -= Time.deltaTime;
-            m_Logo.fillAmount = timeLeft / maxTime;            
-        } else
+            m_Logo.fillAmount = timeLeft / maxTime;
+        } else if (timeLeft <= 0 && stopUpdating == false)
         {
-            FindObjectOfType<GameOver>().DisplayGameOver();
-            Time.timeScale = 0;
+            stopUpdating = true;
+            FindObjectOfType<GameOver>().DisplayGameOver();            
         }        
     }    
 }

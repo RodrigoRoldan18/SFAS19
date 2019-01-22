@@ -13,6 +13,9 @@ public class GameControl : MonoBehaviour {
     [SerializeField]
     private int enemyValue = 5;
 
+    [SerializeField]
+    private float enemyTimeValue = 10f;
+
     private bool stopUpdating = false;       
     private int HighscoreLevel1, HighscoreLevel2, HighscoreLevel3, Score;
     private UIManager m_UIManager;
@@ -22,7 +25,7 @@ public class GameControl : MonoBehaviour {
         if(!FindObjectOfType<PlayerController>() && !FindObjectOfType<LevelSelect>())
         {
             ResetValues();
-        }
+        }           
         GetHighscoreValues();
         int m_Score = PlayerPrefs.GetInt("Score", 0);
         Score = m_Score;
@@ -93,7 +96,9 @@ public class GameControl : MonoBehaviour {
     public void PointsForEnemy()
     {
         Score += enemyValue;
+        m_UIManager.timeLeft += enemyTimeValue;
         PlayerPrefs.SetInt("Score", Score);
+
     }
 
     void ResetValues()
