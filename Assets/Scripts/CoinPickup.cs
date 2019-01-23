@@ -11,7 +11,8 @@ public class CoinPickup : MonoBehaviour {
     {
         if(other.tag == "Player")
         {
-            FindObjectOfType<GameControl>().AddCoin();          
+            FindObjectOfType<GameControl>().AddCoin();
+            FindObjectOfType<AudioManager>().Play("CoinPickedUp");        
             var effect = Instantiate(coinEffect, transform.position, transform.rotation);
             Destroy(effect.gameObject, 3);
             Destroy(gameObject);

@@ -116,6 +116,7 @@ public class GunLogic : MonoBehaviour
             if(Input.GetButtonDown("Invisibility"))
             {
                 m_Invisibility.Play();
+                FindObjectOfType<AudioManager>().Play("GhostActive");
                 FindObjectOfType<PlayerController>().MakeInvisible();                                          
                 m_CanInvisibility = false;                              
             }

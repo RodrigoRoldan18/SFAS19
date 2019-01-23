@@ -3,8 +3,8 @@ PlayerPath?
 C:/University/SFAS2019/SearchForAStar2019.exe
 SceneListBegin?
 Assets/Scenes/Menu.unity
-Assets/Scenes/MainScene.unity
 Assets/Scenes/LevelSelector.unity
+Assets/Scenes/MainScene.unity
 Assets/Scenes/Level1.unity
 Assets/Scenes/Level2.unity
 SceneListEnd?
@@ -191,12 +191,13 @@ a3fc2b3eee58a6a80ff1220e89121068 Assembly-CSharp.dll:.GunLogic
 a8235c217b6cf2fe27dca896710ae4ec Assembly-CSharp-firstpass.dll:UnityStandardAssets.Effects.WaterHoseParticles
 0a006f3734181ba8b26758f0866152c0 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 f5476454eb86e1817e25a825263133c9 Assembly-CSharp-firstpass.dll:UnityStandardAssets.Effects.SmokeParticles
-87f7866bebdb92d8f86de170d68c9f35 Assembly-CSharp.dll:.GameControl
+8e91efb164743d3bf1f3117b7d4ce69e Assembly-CSharp.dll:.GameControl
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp-firstpass.dll:UnityStandardAssets.Water.GerstnerDisplace
 e04611b8715e6833d2bd7010fc6be10b Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 5b5ad732d2d32a997181b009aa65cfb0 Assembly-CSharp-firstpass.dll:UnityStandardAssets.Water.WaterTile
 c26269a2a26b8e74ffa45217a159a80a Assembly-CSharp.dll:.TimedObjectDestroy
 fe65b8b5e45e4d3c65076c85e22762a1 Assembly-CSharp.dll:.AmmoCrateLogic
+8cddfc622304d1dccf4c517e01af4105 Assembly-CSharp.dll:.AudioManager
 2f9af06a78208a67db480e9bfed4a076 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 9318334b30e9f195f573b2ce00154b95 Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 ec20a96c472239ba826fd01cc2393ba0 Assembly-CSharp.dll:.UIManager
